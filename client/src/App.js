@@ -1,19 +1,37 @@
-// client/src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import StockData from './components/StockData';
-import RealTimeStock from './components/RealTimeStock';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import RealTimeStock from './components/RealTimeStock'; // if already integrated
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <div className="App">
-        <h1>Stock Trading Platform</h1>
         <Routes>
-          <Route path="/stock-data" element={<StockData />} />
-          <Route path="/real-time-stock" element={<RealTimeStock />} />
-          <Route path="/" element={<p>Welcome to the Stock Trading Platform</p>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          {/* Protected routes: accessible only when the user is logged in */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/real-time-stock"
+            element={
+              <ProtectedRoute>
+                <RealTimeStock />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>

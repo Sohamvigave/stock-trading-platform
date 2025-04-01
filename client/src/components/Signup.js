@@ -8,15 +8,32 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSignup = async (e) => {
         e.preventDefault();
+
+        // Basic client-side validation
+        if (!name || !email || !password) {
+            setError('All fields are required.');
+            return;
+        }
+
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters long.');
+            return;
+        }
+
+        setLoading(true);
+        setError('');
+
         try {
-            await axios.post('http://localhost:5000/api/auth/signup', { name, email, password });
-            // Redirect to login page after successful signup
-            navigate('/login');
+            await axios.post('/api/auth/signup', { name, email, password });
+            navigate('/login'); // Redirect to login after successful signup
         } catch (err) {
             setError(err.response?.data?.error || 'Signup failed');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -52,7 +69,9 @@ const Signup = () => {
                         required
                     />
                 </div>
-                <button type="submit">Signup</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Signing up...' : 'Signup'}
+                </button>
             </form>
         </div>
     );

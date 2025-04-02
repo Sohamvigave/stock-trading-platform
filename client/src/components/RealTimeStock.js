@@ -6,20 +6,17 @@ const RealTimeStock = () => {
     const [stockData, setStockData] = useState(null);
 
     useEffect(() => {
-        // Connect to the Socket.IO server
         const socket = io('http://localhost:5000');
 
         socket.on('connect', () => {
             console.log('Connected to Socket.IO server');
         });
 
-        // Listen for stock data updates
         socket.on('stockDataUpdate', (data) => {
             console.log('Received stock update:', data);
             setStockData(data);
         });
 
-        // Cleanup the connection when the component unmounts
         return () => {
             socket.disconnect();
         };

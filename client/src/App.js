@@ -4,10 +4,13 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import RealTimeStock from './components/RealTimeStock'; // if needed
-// import StockChart from './components/StockChart'; // if needed
+import RealTimeStock from './components/RealTimeStock';
+import Watchlist from './components/WatchList';
+import Profile from './components/Profile';
+import TradeLab from './components/TradeLab';
 import ProtectedRoute from './components/ProtectedRoute';
-import './App.css'; // Import global CSS
+import Footer from './components/Footer';
+import './App.css';
 
 function App() {
   return (
@@ -18,10 +21,26 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
-            path="/"
+            path="/profile"
             element={
               <ProtectedRoute>
-                <Home />
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/watchlist"
+            element={
+              <ProtectedRoute>
+                <Watchlist />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trade-lab"
+            element={
+              <ProtectedRoute>
+                <TradeLab />
               </ProtectedRoute>
             }
           />
@@ -33,8 +52,17 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }

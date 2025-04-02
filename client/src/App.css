@@ -85,7 +85,59 @@ body {
     color: red;
     margin-bottom: 1rem;
   }
-  
+
+  /* Footer Styles */
+.footer {
+  background-color: #0052cc;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.footer li {
+  margin: 0 1rem;
+}
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Watchlist Tabs */
+.watchlist-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.watchlist-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #0052cc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.watchlist-tabs .active-tab {
+  background-color: #0052cc;
+  color: #fff;
+}
+
+/* Primary Stocks Styles */
+.primary-stocks {
+  margin-top: 1rem;
+}
+.primary-stocks .stock-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
   /* Additional styles for the search form and results */
 .search-form {
   margin-bottom: 2rem;

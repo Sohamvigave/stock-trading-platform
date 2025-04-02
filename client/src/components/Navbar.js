@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../App.css'; // Import global CSS
+import '../App.css';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -22,6 +22,9 @@ const Navbar = () => {
             <ul>
                 {token ? (
                     <>
+                        <li>
+                            <Link to="/profile">Profile</Link>
+                        </li>
                         <li>
                             <button onClick={handleLogout}>Logout</button>
                         </li>

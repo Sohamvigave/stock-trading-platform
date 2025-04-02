@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../App.css'; // Import global CSS
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,7 +13,6 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        // Basic client-side validation
         if (!email || !password) {
             setError('Please fill in all fields.');
             return;
@@ -34,11 +34,11 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>Login</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="error">{error}</p>}
             <form onSubmit={handleLogin}>
-                <div>
+                <div className="form-group">
                     <label>Email:</label>
                     <input
                         type="email"
@@ -47,7 +47,7 @@ const Login = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Password:</label>
                     <input
                         type="password"
@@ -56,7 +56,7 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button type="submit" disabled={loading}>
+                <button type="submit" className="primary" disabled={loading}>
                     {loading ? 'Logging in...' : 'Login'}
                 </button>
             </form>

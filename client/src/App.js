@@ -4,8 +4,10 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import RealTimeStock from './components/RealTimeStock'; // if already integrated
+import RealTimeStock from './components/RealTimeStock'; // if needed
+// import StockChart from './components/StockChart'; // if needed
 import ProtectedRoute from './components/ProtectedRoute';
+import './App.css'; // Import global CSS
 
 function App() {
   return (
@@ -15,7 +17,6 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* Protected routes: accessible only when the user is logged in */}
           <Route
             path="/"
             element={

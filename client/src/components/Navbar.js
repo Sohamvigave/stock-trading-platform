@@ -1,23 +1,25 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../App.css'; // Import global CSS
 
 const Navbar = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
     const handleLogout = () => {
-        // Clear user authentication data
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         navigate('/login');
     };
 
     return (
-        <nav>
+        <nav className="navbar">
+            <div>
+                <Link to="/" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                    Stock Trading Platform
+                </Link>
+            </div>
             <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
                 {token ? (
                     <>
                         <li>

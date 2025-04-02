@@ -1,7 +1,6 @@
-// client/src/components/RealTimeStock.js
-
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import '../App.css';
 
 const RealTimeStock = () => {
     const [stockData, setStockData] = useState(null);
@@ -10,7 +9,6 @@ const RealTimeStock = () => {
         // Connect to the Socket.IO server
         const socket = io('http://localhost:5000');
 
-        // Log successful connection
         socket.on('connect', () => {
             console.log('Connected to Socket.IO server');
         });
@@ -28,7 +26,7 @@ const RealTimeStock = () => {
     }, []);
 
     return (
-        <div>
+        <div className="container">
             <h2>Real-Time Stock Data (via WebSockets)</h2>
             {stockData ? (
                 <div>

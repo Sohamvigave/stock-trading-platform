@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../App.css'; // Import global CSS
+import '../App.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -9,6 +9,13 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    // Redirect if already logged in
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();

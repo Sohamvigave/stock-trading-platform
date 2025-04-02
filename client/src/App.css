@@ -86,3 +86,15 @@ body {
     margin-bottom: 1rem;
   }
   
+  /* Additional styles for the search form and results */
+.search-form {
+  margin-bottom: 2rem;
+}
+
+.stock-result {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eef2f7;
+}

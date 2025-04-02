@@ -21,11 +21,13 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch(err => console.error('MongoDB connection error:', err));
 
 // Mount Routes
-const authRoutes = require('./routes/authRoutes');
-app.use('/api/auth', authRoutes);
-
+const authRoutes = require('./src/routes/authRoutes');
 const stockDataRoutes = require('./src/routes/stockDataRoutes');
+const tradeRoutes = require('./src/routes/tradeRoutes');
+
+app.use('/api/auth', authRoutes);
 app.use('/api/stock-data', stockDataRoutes);
+app.use('/api/trade', tradeRoutes);
 
 // Test Route
 app.get('/', (req, res) => {

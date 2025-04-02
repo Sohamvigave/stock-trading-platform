@@ -1,8 +1,10 @@
+// server/src/routes/tradeRoutes.js
+
 const router = require('express').Router();
 const { buyStock, sellStock } = require('../controllers/tradeController');
-const authMiddleware = require('../middleware/authMiddleware'); // Import the middleware
+const authMiddleware = require('../middleware/authMiddleware'); // Create or import your JWT verification middleware
 
-// Secure trade routes
+// Protect these routes with authentication
 router.post('/buy', authMiddleware, buyStock);
 router.post('/sell', authMiddleware, sellStock);
 

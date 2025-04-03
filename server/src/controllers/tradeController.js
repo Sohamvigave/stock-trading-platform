@@ -26,100 +26,98 @@ async function fetchCurrentPrice(ticker, exchange) {
  * Handle a buy order.
  * Expected body: { ticker, exchange, quantity }
  */
-async function buyStock(req, res) {
+const buyStock = async (req, res) => {
     try {
         const { ticker, exchange, quantity } = req.body;
-        const userId = req.user.userId; // Assume authentication middleware sets req.user
+        const userId = req.user.userId;
         const qty = Number(quantity);
-
         if (qty <= 0) return res.status(400).json({ error: 'Invalid quantity' });
 
-        // Get current price
+        // Fetch current price (using your helper function)
         const currentPrice = await fetchCurrentPrice(ticker, exchange);
-        if (!currentPrice) return res.status(500).json({ error: 'Unable to fetch stock price' });
+        if (!currentPrice) return res.status(500).json({ error: 'Unable to fetch price' });
 
-        // Calculate total cost
         const cost = currentPrice * qty;
 
-        // Get user from DB
         const user = await User.findById(userId);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        // Check if the user has sufficient balance
         if (user.balance < cost) return res.status(400).json({ error: 'Insufficient balance' });
 
-        // Deduct cost from user's balance
+        // Deduct cost from balance
         user.balance -= cost;
 
-        // Update portfolio: if stock exists, update quantity and average price; otherwise, add new entry.
-        const existingStock = user.portfolio.find(item => item.symbol === ticker);
-        if (existingStock) {
-            // Calculate new average price
-            const totalQuantity = existingStock.quantity + qty;
-            existingStock.avgPrice = ((existingStock.avgPrice * existingStock.quantity) + cost) / totalQuantity;
-            existingStock.quantity = totalQuantity;
+        // Update portfolio
+        const existing = user.portfolio.find(item => item.symbol === ticker);
+        if (existing) {
+            const totalCost = existing.avgPrice * existing.quantity + cost;
+            existing.quantity += qty;
+            existing.avgPrice = totalCost / existing.quantity;
         } else {
             user.portfolio.push({ symbol: ticker, quantity: qty, avgPrice: currentPrice });
         }
 
-        // Optionally, record the trade history
-        user.trades.push({ symbol: ticker, quantity: qty, price: currentPrice, type: 'buy' });
-
+        // Save the updated user
         await user.save();
-        res.json({ message: 'Stock purchased successfully', portfolio: user.portfolio, balance: user.balance });
+
+        // Return the updated user data in the response
+        res.json({ message: 'Stock purchased successfully', user });
     } catch (error) {
-        console.error('Buy order error:', error.message);
+        console.error('Buy error:', error);
         res.status(500).json({ error: 'Buy order failed' });
     }
-}
+};
+
 
 /**
  * Handle a sell order.
  * Expected body: { ticker, exchange, quantity }
  */
-async function sellStock(req, res) {
+const sellStock = async (req, res) => {
     try {
         const { ticker, exchange, quantity } = req.body;
-        const userId = req.user.userId; // Assume authentication middleware sets req.user
+        const userId = req.user.userId;
         const qty = Number(quantity);
-
         if (qty <= 0) return res.status(400).json({ error: 'Invalid quantity' });
 
-        // Get current price
+        // Fetch the current price using your helper (assume fetchCurrentPrice is defined)
         const currentPrice = await fetchCurrentPrice(ticker, exchange);
-        if (!currentPrice) return res.status(500).json({ error: 'Unable to fetch stock price' });
+        if (!currentPrice) return res.status(500).json({ error: 'Unable to fetch price' });
 
-        // Get user from DB
         const user = await User.findById(userId);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        // Find the stock in the user's portfolio
-        const existingStock = user.portfolio.find(item => item.symbol === ticker);
-        if (!existingStock || existingStock.quantity < qty) {
+        const existing = user.portfolio.find(item => item.symbol === ticker);
+        if (!existing || existing.quantity < qty) {
             return res.status(400).json({ error: 'Not enough shares to sell' });
         }
 
-        // Update portfolio: reduce quantity
-        existingStock.quantity -= qty;
-        // Remove the stock if quantity becomes zero
-        if (existingStock.quantity === 0) {
+        // Calculate revenue from sale
+        const revenue = currentPrice * qty;
+
+        // Update portfolio: subtract sold quantity
+        existing.quantity -= qty;
+        if (existing.quantity === 0) {
+            // Remove stock from portfolio if quantity drops to zero
             user.portfolio = user.portfolio.filter(item => item.symbol !== ticker);
         }
 
-        // Increase user's balance by sale amount
-        const revenue = currentPrice * qty;
+        // Add revenue to user's balance
         user.balance += revenue;
 
-        // Optionally, record the trade history
-        user.trades.push({ symbol: ticker, quantity: qty, price: currentPrice, type: 'sell' });
+        // Optionally, record trade history here.
 
+        // Save the updated user and return updated data
         await user.save();
-        res.json({ message: 'Stock sold successfully', portfolio: user.portfolio, balance: user.balance });
+        res.json({ message: 'Stock sold successfully', user });
     } catch (error) {
-        console.error('Sell order error:', error.message);
+        console.error('Sell error:', error);
         res.status(500).json({ error: 'Sell order failed' });
     }
-}
+};
+
+module.exports = { buyStock, sellStock };
+
 
 module.exports = {
     buyStock,

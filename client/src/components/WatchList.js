@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PrimaryStocks from './PrimaryStocks'; // We'll reuse your PrimaryStocks component for Primary tab
 // import '../App.css';
+import Holdings from './Holdings';
 import './Watchlist.css'
 
 const Watchlist = () => {
@@ -265,10 +266,7 @@ const Watchlist = () => {
                         <PrimaryStocks />
                     ) : (
                         <div className="holdings-section">
-                            <h2>Virtual Holdings</h2>
-                            <p className="placeholder-text">
-                                Your purchased stocks will appear here when you start trading
-                            </p>
+                            <Holdings />
                         </div>
                     )}
                 </div>

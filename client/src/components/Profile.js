@@ -2,16 +2,24 @@ import React from 'react';
 import '../App.css';
 
 const Profile = () => {
-    const user = JSON.parse(localStorage.getItem('user')) || {};
+    // Get the user data string from localStorage
+    const userString = localStorage.getItem('user');
+    let user = {};
+    try {
+        // Only parse if userString exists and is not "undefined"
+        if (userString && userString !== "undefined") {
+            user = JSON.parse(userString);
+        }
+    } catch (err) {
+        console.error("Error parsing user data from localStorage:", err);
+    }
 
-    // Safely access nested properties with optional chaining
     return (
         <div className="container">
             <h2>Profile</h2>
-            <p><strong>Name:</strong> {user?.name?.trim() || 'N/A'}</p>
-            <p><strong>Email:</strong> {user?.email || 'No email associated with this account'}</p>
-            <p><strong>Account ID:</strong> {user?.id || 'N/A'}</p>
-            <p><strong>Balance:</strong> ${user?.balance?.toLocaleString() || '0'}</p>
+            <p><strong>Name:</strong> {user.name || "N/A"}</p>
+            <p><strong>Email:</strong> {user.email || "N/A"}</p>
+            <p><strong>Balance:</strong> {user.balance || "N/A"}</p>
         </div>
     );
 };

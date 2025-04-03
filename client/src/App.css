@@ -150,3 +150,63 @@ body {
   border-radius: 4px;
   background-color: #eef2f7;
 }
+
+/* Search form, dropdown, and stock result styling */
+.search-form {
+  margin-bottom: 2rem;
+}
+
+.stock-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eef2f7;
+  position: relative;
+}
+
+.dropdown {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #0052cc;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+/* Watchlist Tabs */
+.watchlist-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.watchlist-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #0052cc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.active-tab {
+  background-color: #0052cc;
+  color: #fff;
+}
+
+/* Holdings display */
+.watchlists-display {
+  margin-top: 2rem;
+}
+.watchlist-item {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+.stock-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+.stock-item:last-child {
+  border-bottom: none;
+}

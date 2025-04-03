@@ -9,6 +9,12 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        // // Clear all user-specific data
+        // Object.keys(localStorage).forEach(key => {
+        //     if (key.startsWith('watchlists_')) {
+        //         localStorage.removeItem(key);
+        //     }
+        // });
         navigate('/login');
     };
 

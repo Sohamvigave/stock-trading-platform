@@ -24,7 +24,8 @@ mongoose.connect(process.env.MONGODB_URI)
 const authRoutes = require('./src/routes/authRoutes');
 const stockDataRoutes = require('./src/routes/stockDataRoutes');
 const tradeRoutes = require('./src/routes/tradeRoutes');
-
+const tradeLabRoutes = require('./src/routes/tradeLabRoutes');
+app.use('/api/trade-lab', tradeLabRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/stock-data', stockDataRoutes);
 app.use('/api/trade', tradeRoutes);

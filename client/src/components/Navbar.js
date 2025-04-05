@@ -9,21 +9,13 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        // // Clear all user-specific data
-        // Object.keys(localStorage).forEach(key => {
-        //     if (key.startsWith('watchlists_')) {
-        //         localStorage.removeItem(key);
-        //     }
-        // });
         navigate('/login');
     };
 
     return (
         <nav className="navbar">
             <div>
-                <Link to="/" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                    Stock Trading Platform
-                </Link>
+                <Link to="/">Stock Trading Platform</Link>
             </div>
             <ul>
                 {token ? (

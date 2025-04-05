@@ -25,6 +25,8 @@ const authRoutes = require('./src/routes/authRoutes');
 const stockDataRoutes = require('./src/routes/stockDataRoutes');
 const tradeRoutes = require('./src/routes/tradeRoutes');
 const tradeLabRoutes = require('./src/routes/tradeLabRoutes');
+const watchlistRoutes = require('./src/routes/watchlistRoutes');
+app.use('/api/watchlists', watchlistRoutes);
 app.use('/api/trade-lab', tradeLabRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/stock-data', stockDataRoutes);

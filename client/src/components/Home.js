@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../App.css';
+import './HomePage.css';
 
 const Home = () => {
     const [searchTicker, setSearchTicker] = useState('');
@@ -83,11 +83,14 @@ const Home = () => {
     };
 
     return (
-        <div className="container">
-            <h2>Welcome to Your Trading Dashboard</h2>
-            <p>Use the search below to get live stock prices and trade.</p>
-            <form onSubmit={handleSearch} className="search-form">
-                <div className="form-group">
+        <div className="home-container">
+            <div className="dashboard-header">
+                <h2>Welcome to Your Trading Dashboard</h2>
+                <p>Use the search below to get live stock prices and trade.</p>
+            </div>
+
+            <form onSubmit={handleSearch} className="search-section">
+                <div className="input-group">
                     <label>Ticker Symbol:</label>
                     <input
                         type="text"
@@ -97,7 +100,7 @@ const Home = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="input-group">
                     <label>Exchange (default NSE):</label>
                     <input
                         type="text"
@@ -106,29 +109,25 @@ const Home = () => {
                         onChange={(e) => setSearchExchange(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="primary" disabled={loading}>
+                <button type="submit" className="search-button" disabled={loading}>
                     {loading ? 'Searching...' : 'Search Stock'}
                 </button>
             </form>
-            {error && <p className="error">{error}</p>}
 
-            {/* If a stock is found, show its details along with Buy/Sell buttons */}
+            {error && <p className="error-message">{error}</p>}
+
             {searchResult && (
-                <div className="stock-result">
-                    <p>
-                        <strong>Ticker:</strong> {searchResult.ticker}
-                    </p>
-                    <p>
-                        <strong>Exchange:</strong> {searchResult.exchange}
-                    </p>
-                    <p>
-                        <strong>Price:</strong> {searchResult.price}
-                    </p>
-                    <div style={{ marginTop: '1rem' }}>
-                        <button onClick={handleBuy} className="primary" style={{ marginRight: '1rem' }}>
+                <div className="stock-display">
+                    <div className="stock-info">
+                        <p><strong>Ticker:</strong> {searchResult.ticker}</p>
+                        <p><strong>Exchange:</strong> {searchResult.exchange}</p>
+                        <p><strong>Price:</strong> {searchResult.price}</p>
+                    </div>
+                    <div className="trade-buttons">
+                        <button onClick={handleBuy} className="trade-button buy-button">
                             Buy
                         </button>
-                        <button onClick={handleSell} className="primary">
+                        <button onClick={handleSell} className="trade-button sell-button">
                             Sell
                         </button>
                     </div>

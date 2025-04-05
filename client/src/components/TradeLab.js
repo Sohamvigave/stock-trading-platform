@@ -6,20 +6,20 @@ const TradeLab = () => {
     const [metrics, setMetrics] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
-    // Get the token from localStorage (assumes user is authenticated)
     const token = localStorage.getItem('token');
+
+    // Format numbers to 2 decimal places with currency symbol
+    const formatCurrency = (value) => {
+        return `₹${parseFloat(value).toFixed(2)}`;
+    };
 
     useEffect(() => {
         const fetchMetrics = async () => {
             setLoading(true);
             setError('');
             try {
-                // Call the backend endpoint to fetch trade lab metrics
                 const response = await axios.get('http://localhost:5000/api/trade-lab', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                    headers: { Authorization: `Bearer ${token}` }
                 });
                 setMetrics(response.data);
             } catch (err) {
@@ -35,7 +35,12 @@ const TradeLab = () => {
         return (
             <div className="container">
                 <h2>Trade Lab</h2>
-                <p>Loading trade lab data...</p>
+                <div className="loading-placeholder">
+                    <div className="loading-bar"></div>
+                    <div className="loading-bar"></div>
+                    <div className="loading-bar"></div>
+                    <div className="loading-bar"></div>
+                </div>
             </div>
         );
     }
@@ -44,30 +49,53 @@ const TradeLab = () => {
         return (
             <div className="container">
                 <h2>Trade Lab</h2>
-                <p className="error">{error}</p>
+                <p className="error-message">{error}</p>
             </div>
         );
     }
 
     return (
         <div className="container">
-            <h2>Trade Lab</h2>
-            <div className="trade-lab-stats">
-                <div className="stat-item">
-                    <h3>Total Portfolio</h3>
-                    <p>{metrics.totalPortfolio}</p>
+            <h2 className="page-title">Trade Lab</h2>
+            <div className="metrics-grid">
+                <div className="metric-card">
+                    <div className="metric-header">
+                        <h3>Total Portfolio</h3>
+                        <span className="metric-icon">💰</span>
+                    </div>
+                    <div className="metric-value">
+                        {formatCurrency(metrics.totalPortfolio)}
+                    </div>
                 </div>
-                <div className="stat-item">
-                    <h3>Unrealized P&L</h3>
-                    <p>{metrics.unrealizedPnL}</p>
+
+                <div className="metric-card">
+                    <div className="metric-header">
+                        <h3>Unrealized P&L</h3>
+                        <span className="metric-icon">📈</span>
+                    </div>
+                    <div className={`metric-value ${metrics.unrealizedPnL >= 0 ? 'positive' : 'negative'}`}>
+                        {formatCurrency(metrics.unrealizedPnL)}
+                    </div>
                 </div>
-                <div className="stat-item">
-                    <h3>Available Margin</h3>
-                    <p>{metrics.availableMargin}</p>
+
+                <div className="metric-card">
+                    <div className="metric-header">
+                        <h3>Available Margin</h3>
+                        <span className="metric-icon">🟢</span>
+                    </div>
+                    <div className="metric-value">
+                        {formatCurrency(metrics.availableMargin)}
+                    </div>
                 </div>
-                <div className="stat-item">
-                    <h3>Invested Margin</h3>
-                    <p>{metrics.investedMargin}</p>
+
+                <div className="metric-card">
+                    <div className="metric-header">
+                        <h3>Invested Margin</h3>
+                        <span className="metric-icon">🔴</span>
+                    </div>
+                    <div className="metric-value">
+                        {formatCurrency(metrics.investedMargin)}
+                    </div>
                 </div>
             </div>
         </div>

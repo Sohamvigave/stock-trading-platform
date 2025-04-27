@@ -1,0 +1,293 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+    background-color: #0052cc;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  .navbar li {
+    margin: 0 1rem;
+  }
+  .navbar a,
+  .navbar button {
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .navbar button:hover,
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Container for pages */
+  .container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  button.primary {
+    background-color: #0052cc;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  button.primary:disabled {
+    background-color: #8a9bdc;
+    cursor: not-allowed;
+  }
+  button.primary:hover:enabled {
+    background-color: #003d99;
+  }
+  
+  /* Error message */
+  .error {
+    color: red;
+    margin-bottom: 1rem;
+  }
+
+  /* Footer Styles */
+.footer {
+  background-color: #0052cc;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.footer li {
+  margin: 0 1rem;
+}
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Watchlist Tabs */
+.watchlist-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.watchlist-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #0052cc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.watchlist-tabs .active-tab {
+  background-color: #0052cc;
+  color: #fff;
+}
+
+/* Primary Stocks Styles */
+.primary-stocks {
+  margin-top: 1rem;
+}
+.primary-stocks .stock-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+  /* Additional styles for the search form and results */
+.search-form {
+  margin-bottom: 2rem;
+}
+
+.stock-result {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eef2f7;
+}
+
+/* Search form, dropdown, and stock result styling */
+.search-form {
+  margin-bottom: 2rem;
+}
+
+.stock-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eef2f7;
+  position: relative;
+}
+
+.dropdown {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #0052cc;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+/* Watchlist Tabs */
+.watchlist-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.watchlist-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #0052cc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.active-tab {
+  background-color: #0052cc;
+  color: #fff;
+}
+
+/* Holdings display */
+.watchlists-display {
+  margin-top: 2rem;
+}
+.watchlist-item {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+.stock-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+.stock-item:last-child {
+  border-bottom: none;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.metric-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+}
+
+.metric-value {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.positive {
+  color: #10b981;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+.loading-placeholder {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.loading-bar {
+  height: 80px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1 }
+  50% { opacity: 0.5 }
+  100% { opacity: 1 }
+}
+
+.error-message {
+  color: #dc2626;
+  background: #fef2f2;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .metric-value {
+      font-size: 1.5rem;
+  }
+}
